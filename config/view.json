@@ -1,0 +1,215 @@
+{
+  "id": 1,
+  "name": "Filter and sort - product - int",
+  "user": {
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "username": "john.doe@example.com",
+    "fullName": "John Doe",
+    "accessEnabled": true
+  },
+  "ownerType": "implementation",
+  "display": "list",
+  "columnOrders": [
+    "index",
+    "publisherName",
+    "category",
+    "status",
+    "cta"
+  ],
+  "columns": [
+    {
+      "id": 247,
+      "hidden": false,
+      "labels": {
+        "en": "Publisher",
+        "fr": "Éditeur"
+      },
+      "type": "string",
+      "field": "publisherName",
+      "width": 200,
+      "options": [],
+      "isBeamyCore": true
+    },
+    {
+      "id": 248,
+      "hidden": false,
+      "isEditable": true,
+      "labels": {
+        "en": "Status",
+        "fr": "Statut"
+      },
+      "type": "select",
+      "field": "status",
+      "width": 200,
+      "options": [
+        {
+          "id": 0,
+          "labels": {
+            "en": "Deployment in progress",
+            "fr": "Déploiement en cours"
+          }
+        },
+        {
+          "id": 1,
+          "labels": {
+            "en": "Deployed",
+            "fr": "Déployé"
+          }
+        },
+        {
+          "id": 2,
+          "labels": {
+            "en": "Stopped",
+            "fr": "Arrêté"
+          }
+        },
+        {
+          "id": 3,
+          "labels": {
+            "en": "Request in progress",
+            "fr": "Requête en cours"
+          }
+        },
+        {
+          "id": 4,
+          "labels": {
+            "en": "Demande archivée",
+            "fr": "Archived demand"
+          }
+        },
+        {
+          "id": 5,
+          "labels": {
+            "en": "Detected",
+            "fr": "Detecté"
+          }
+        },
+        {
+          "id": 6,
+          "labels": {
+            "en": "Archived",
+            "fr": "Archivé"
+          }
+        }
+      ],
+      "isInRepositoryCompletness": false,
+      "isInPieChart": true
+    },
+    {
+      "id": 252,
+      "hidden": false,
+      "isEditable": false,
+      "labels": {
+        "en": "Category",
+        "fr": "Catégorie"
+      },
+      "type": "multi-select",
+      "field": "category",
+      "width": 200,
+      "options": [
+        {
+          "id": 108,
+          "labels": {
+            "fr": "Admin & Finance",
+            "en": "Admin & Finance"
+          }
+        },
+        {
+          "id": 110,
+          "labels": {
+            "fr": "Bank & Insurance",
+            "en": "Bank & Insurance"
+          }
+        },
+        {
+          "id": 101,
+          "labels": {
+            "fr": "Commerce",
+            "en": "Commerce"
+          }
+        },
+        {
+          "id": 104,
+          "labels": {
+            "fr": "Human Resources",
+            "en": "Human Resources"
+          }
+        },
+        {
+          "id": 106,
+          "labels": {
+            "fr": "IT Infrastructure",
+            "en": "IT Infrastructure"
+          }
+        },
+        {
+          "id": 105,
+          "labels": {
+            "fr": "IT Management",
+            "en": "IT Management"
+          }
+        },
+        {
+          "id": 107,
+          "labels": {
+            "fr": "IT Security",
+            "en": "IT Security"
+          }
+        },
+        {
+          "id": 100,
+          "labels": {
+            "fr": "Marketing / Sales",
+            "en": "Marketing / Sales"
+          }
+        },
+        {
+          "id": 109,
+          "labels": {
+            "fr": "Office & Collaboration",
+            "en": "Office & Collaboration"
+          }
+        },
+        {
+          "id": 102,
+          "labels": {
+            "fr": "Operations / Supply",
+            "en": "Operations / Supply"
+          }
+        },
+        {
+          "id": 111,
+          "labels": {
+            "fr": "Other Vertical Industry",
+            "en": "Other Vertical Industry"
+          }
+        },
+        {
+          "id": 103,
+          "labels": {
+            "fr": "R&D",
+            "en": "R&D"
+          }
+        }
+      ],
+      "isBeamyCore": true,
+      "isInRepositoryCompletness": false,
+      "isInPieChart": true
+    }
+  ],
+  "private": false,
+  "protected": false,
+  "filters": [
+    {
+      "id": 28,
+      "field": "authorization",
+      "operation": "IS_EQUAL_TO",
+      "value": "-1"
+    }
+  ],
+  "sorts": [],
+  "group": null
+}
