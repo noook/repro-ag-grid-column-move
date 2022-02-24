@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   AgGridEvent,
   ColDef,
@@ -39,13 +40,13 @@ function generateColumnDefFromView (column: any): CustomColDef {
   }
 }
 
-function generateColumnDefsFromView (
+export function generateColumnDefsFromView (
   view: any
 ): ColDef[] {
   return view.columns.map((column: any) => generateColumnDefFromView(column))
 }
 
-function getOptions (): GridOptions {
+export function getOptions (): GridOptions {
   return {
     getDataPath: (data) => {
       return data.__path
@@ -150,10 +151,10 @@ function getEvents ({
 }: Pick<any, 'view' | 'onChangeView'> & {skipNextRerender: Ref<boolean>; }): GridOptions {
   const updateViewFn = (event: any) => {
     debouncedAgGridEvent(() => {
-      const updatedView = getUpdateViewFromAgGridEvent(event, view.value)
+      const updatedView = getUpdateViewFromAgGridEvent(event, view)
       if (updatedView) {
         skipNextRerender.value = true
-        onChangeView({ ...view.value, ...updatedView })
+        onChangeView({ ...view, ...updatedView })
       }
     })
   }
@@ -183,9 +184,9 @@ export default function useAgGrid ({
 
   const getAgGridInit = () => {
     return asGridOptions({
-      columnDefs: getColumnDefs(view.value),
-      rowData: records.value,
-      treeData: view.value.group !== null,
+      columnDefs: getColumnDefs(view),
+      rowData: records,
+      treeData: view.group !== null,
       ...getOptions(),
       context: {
         view
@@ -206,8 +207,8 @@ export default function useAgGrid ({
 
   const updateRecords = ({ showLoader = false }: {showLoader: boolean}) => {
     showLoader && turnOnBeamyLoader()
-    aggrid.value.treeData = view.value.group != null
-    aggrid.value.api?.setRowData(records.value)
+    aggrid.value.treeData = view.group != null
+    aggrid.value.api?.setRowData(records)
     showLoader && turnOffBeamyLoader()
   }
 
@@ -218,12 +219,12 @@ export default function useAgGrid ({
       onGridReady: (params: any) => {
         aggrid.value.api = params.api
         aggrid.value.columnApi = params.columnApi
-        aggrid.value.api!.setRowData(records.value)
+        aggrid.value.api!.setRowData(records)
         aggrid.value.api!.setColumnDefs([])
-        aggrid.value.api!.setColumnDefs(getColumnDefs(view.value))
+        aggrid.value.api!.setColumnDefs(getColumnDefs(view))
         setTimeout(() => updateRecords({ showLoader: false }), 250)
-      },
-      ...getEvents({ view, onChangeView, skipNextRerender })
+      }
+      // ...getEvents({ view, onChangeView, skipNextRerender })
     }
   }
 }

@@ -1,35 +1,28 @@
 <template>
   <div>
     <ag-grid-vue
-      v-bind="aggrid"
       style="width: 1000px; height: 500px;"
-      class="ag-theme-alpine bm-aggrid"
+      v-bind="aggrid"
+      class="ag-theme-alpine"
       :modules="modules"
-      @grid-ready="events.onGridReady"
     />
-    <p>hello</p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { getAgGridModules } from '~/config/ag-grid'
 import useAgGrid from '@/composable/useAgGrid'
-import view from '@/config/view.json'
 import records from '@/config/records.json'
+import view from '@/config/view.json'
 
 export default defineComponent({
   name: 'IndexPage',
   setup () {
-    const { aggrid, events } = useAgGrid({
-      view: ref(view),
-      records: ref(records)
-    })
-
+    const { aggrid } = useAgGrid({ records, view, onChangeView: () => {} })
     return {
       aggrid,
-      modules: getAgGridModules(),
-      events
+      modules: getAgGridModules()
     }
   }
 })
