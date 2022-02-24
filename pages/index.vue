@@ -5,6 +5,7 @@
       v-bind="aggrid"
       class="ag-theme-alpine"
       :modules="modules"
+      @grid-ready="events.onGridReady"
     />
   </div>
 </template>
@@ -19,9 +20,10 @@ import view from '@/config/view.json'
 export default defineComponent({
   name: 'IndexPage',
   setup () {
-    const { aggrid } = useAgGrid({ records, view, onChangeView: () => {} })
+    const { aggrid, events } = useAgGrid({ records, view, onChangeView: () => {} })
     return {
       aggrid,
+      events,
       modules: getAgGridModules()
     }
   }

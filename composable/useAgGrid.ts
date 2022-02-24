@@ -2,6 +2,7 @@
 import {
   AgGridEvent,
   ColDef,
+  GridApi,
   GridOptions
 } from '@ag-grid-community/core'
 import { ref, Ref } from '@nuxtjs/composition-api'
@@ -184,8 +185,6 @@ export default function useAgGrid ({
 
   const getAgGridInit = () => {
     return asGridOptions({
-      columnDefs: getColumnDefs(view),
-      rowData: records,
       treeData: view.group !== null,
       ...getOptions(),
       context: {
@@ -195,6 +194,8 @@ export default function useAgGrid ({
   }
 
   const aggrid = ref(getAgGridInit())
+
+  const agGridApi = ref<GridApi>()
 
   const turnOnBeamyLoader = () => {
     needRefreshLoading.value = true
@@ -216,15 +217,12 @@ export default function useAgGrid ({
     aggrid,
     needRefreshLoading,
     events: {
-      onGridReady: (params: any) => {
-        aggrid.value.api = params.api
-        aggrid.value.columnApi = params.columnApi
-        aggrid.value.api!.setRowData(records)
-        aggrid.value.api!.setColumnDefs([])
-        aggrid.value.api!.setColumnDefs(getColumnDefs(view))
-        setTimeout(() => updateRecords({ showLoader: false }), 250)
+      onGridReady: (params: AgGridEvent) => {
+        agGridApi.value = params.api
+
+        agGridApi.value.setRowData(records)
+        agGridApi.value.setColumnDefs(getColumnDefs(view))
       }
-      // ...getEvents({ view, onChangeView, skipNextRerender })
     }
   }
 }
